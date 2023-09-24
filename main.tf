@@ -1,5 +1,5 @@
 module "s3" {
-  source = "git@github.com:erioluwa66/s3-backend-repo.git//s3module?ref=v1.2.1"
+  source = "git@github.com:erioluwa66/s3-backend-repo.git//s3module?ref=v1.2.2"
 }
 
 #backend configure
