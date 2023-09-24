@@ -2,6 +2,7 @@ module "s3" {
   source = "git@github.com:erioluwa66/s3-backend-repo.git//s3module?ref=v1.2.0"
 }
 
+#backend configuration
 terraform {
   required_providers {
     aws = {
