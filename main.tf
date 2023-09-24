@@ -1,5 +1,5 @@
 module "s3" {
-  source = "git@github.com:erioluwa66/s3-backend-repo.git//s3module?ref=v1.2.2"
+  source = "git@github.com:erioluwa66/s3-backend-repo.git//s3module?ref=v1.2.3"
 }
 
 #backend configure
@@ -18,6 +18,7 @@ terraform {
     encrypt = true
 
   }
-
-
+}
+provider "aws" {
+    region = "us-east-2"
 }
