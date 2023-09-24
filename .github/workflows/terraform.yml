@@ -3,33 +3,25 @@ name: terraform
 on: [push]
 
 env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY}}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY}}
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.1.9
-
-      - name: Initialize SSH agent
-        run: eval `ssh-agent -s`
-
-      - name: Add SSH key to agent
-        run: |
-          echo "${{ secrets.SSH_KEY_GITHUB_ACTIONS }}" | tr -d '\r' | ssh-add -
-
-      - name: Initialize Terraform
-        run: terraform init
-
-      - name: Validate Terraform
+      - name: Init
+        run:  |
+            eval `ssh-agent -s`
+            ssh-add - <<< '${{ secrets.SSH_KEY_GITHUB_ACTIONS}}'
+            terraform init
+      - name: validate
         run: terraform validate
-
-      - name: Plan Terraform
-        run: terraform plan
+      - name: plan
+        run: terraform plan  
+      - name: apply
+        run: terraform apply -auto-approve
