@@ -12,7 +12,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket  = "Landmark-automation-mariam"
+    bucket  = "landmark-automation-mariam"
     region  = "us-east-2"
     key     = "action/terraform.tfstate"
     encrypt = true
